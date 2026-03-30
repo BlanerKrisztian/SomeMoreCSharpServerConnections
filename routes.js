@@ -46,4 +46,4 @@ router.post("/weather", async (req,res) => {
 
 
 
-module.exports = routerd
+module.exports = router

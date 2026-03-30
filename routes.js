@@ -24,7 +24,7 @@ router.delete("/faction",(req,res) => {
 // DB ----------------------------------------------
 
 
-router.post("/weather", (req,res) => {
+router.post("/weather", async (req,res) => {
     const { name, intensity, description } = req.body
     if (!name) {
         res.status(400).json({Message:"Missing data: name"}).end()
@@ -34,7 +34,13 @@ router.post("/weather", (req,res) => {
         res.status(400).json({Message:"Missing data: intensity"}).end()
         return
     }
-    
+    else if (description > 255) {
+        res.status(400).json({Message:"Description cannot exceed 255 characters"}).end()
+        return
+    }
+    await dbHandler.weathertype.create({
+        name, intensity, description
+    })
     res.status(200).json({Message:"Successfull creation"}).end()
 })
 

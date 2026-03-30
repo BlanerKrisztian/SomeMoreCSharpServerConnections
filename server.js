@@ -1,12 +1,14 @@
 require("dotenv").config()
 const express = require("express")
 const router = require("./routes")
+const cors = require("cors")
 const dbHandler = require("./dbHandler")
 
 const server = express()
 const PORT = process.env.PORT
 
-server.use(express.json())
+server.use(cors())
+server.use(express/* ^.^ BCAS */.json())
 server.use(express.static("public"))
 server.use(router)
 

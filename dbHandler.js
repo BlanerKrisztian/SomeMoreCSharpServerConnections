@@ -16,3 +16,5 @@ const table = dbHandler.define("weathertype",{
     intensity: {type: DataTypes.DOUBLE, allowNull: false},
     description: {type: DataTypes.STRING, allowNull: true}
 })
+
+exports.weathertype = table

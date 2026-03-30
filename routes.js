@@ -1,4 +1,5 @@
 const express = require("express")
+const dbHandler = require("./dbHandler")
 const router = express.Router()
 
 const factions = ["Tyrranids", "Automatons", "Squith", "GLA", "USA","Terran","Greenskins","Chaos","Nurgle","GDI","NOD","Danube Federation","Empire", "Deepwater Guard"]
@@ -20,4 +21,23 @@ router.delete("/faction",(req,res) => {
     res.status(200).json({Message:`successfully Deleted a faction`}).end()
 })
 
-module.exports = router
+// DB ----------------------------------------------
+
+
+router.post("/weather", (req,res) => {
+    const { name, intensity, description } = req.body
+    if (!name) {
+        res.status(400).json({Message:"Missing data: name"}).end()
+        return
+    }
+    else if (!intensity) {
+        res.status(400).json({Message:"Missing data: intensity"}).end()
+        return
+    }
+    
+    res.status(200).json({Message:"Successfull creation"}).end()
+})
+
+
+
+module.exports = routerd

@@ -8,10 +8,10 @@ namespace TheVeryLastDayBeforeBreak
 {
     public class WeatherType
     {
-        public int id             { get; set; }
+        public int id               { get; set; }
         public string name          { get; set; }
         public double intensity     { get; set; }
-        public string description { get; set; }
+        public string description   { get; set; }
 
         public WeatherType(string name, double intesity, string description)
         {

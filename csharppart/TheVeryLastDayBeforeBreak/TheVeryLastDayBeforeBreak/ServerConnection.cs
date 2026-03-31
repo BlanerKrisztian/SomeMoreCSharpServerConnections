@@ -21,7 +21,7 @@ namespace TheVeryLastDayBeforeBreak
         }
         public ServerConnection(string url)
         {
-            client.BaseAddress = new Uri(url); ;
+            client.BaseAddress = new Uri(url);
         }
 
         public async Task<ServerResponse> PostWeatherType(string name,double intensity,string description)
@@ -62,6 +62,21 @@ namespace TheVeryLastDayBeforeBreak
             {
                 Console.WriteLine(e.Message);
                 return null;
+            }
+        }
+
+        public async Task<bool> DeleteFish(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.DeleteAsync("/fish/" + id);
+                response.EnsureSuccessStatusCode();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
             }
         }
 

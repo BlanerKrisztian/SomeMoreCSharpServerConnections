@@ -96,5 +96,31 @@ namespace TheVeryLastDayBeforeBreak
                 return null;
             }
         }
+
+
+        public async Task<List<Film>> GetFilms()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("/films");
+                response.EnsureSuccessStatusCode();
+                List<Film> films = JsonSerializer.Deserialize<List<Film>>((await response.Content.ReadAsStringAsync()));
+                return films;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public async Task PostFilm(string title, int date, double rating)
+        {/*
+            string jsonfilm = JsonSerializer.Serialize(new Film() { cim = title, ertekeles = rating, megjelenes = date });
+            StringContent scontent = new(jsonfilm, Encoding.UTF8, "Application/JSON");
+            HttpResponseMessage respones = await client.PostAsync("/film", scontent);
+            */
+            throw new NotImplementedException();
+        }
     }
 }

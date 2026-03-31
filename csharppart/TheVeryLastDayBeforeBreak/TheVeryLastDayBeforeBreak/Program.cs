@@ -7,7 +7,8 @@ namespace TheVeryLastDayBeforeBreak
         static void Main(string[] args)
         {
             //Start();
-            Start2();
+            //Start2();
+            Start3();
             Console.ReadLine();
             
         }
@@ -28,6 +29,12 @@ namespace TheVeryLastDayBeforeBreak
             Console.WriteLine("weight aswell");
             double weight = double.Parse(Console.ReadLine());
             // await server.PostFish(fishname,weight);
+        }
+        static async void Start3()
+        {
+
+            ServerConnection server = new();
+            (await server.GetFilms()).ForEach(f => Console.WriteLine(f));
         }
     }
 }

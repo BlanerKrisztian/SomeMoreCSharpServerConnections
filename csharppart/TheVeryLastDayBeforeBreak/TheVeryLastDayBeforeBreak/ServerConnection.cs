@@ -44,5 +44,42 @@ namespace TheVeryLastDayBeforeBreak
                 return null;
             }
         }
+        public async Task<ServerResponse> PostFish(string typeoffish, double weight)
+        {                                                  
+            try                                           
+            {
+                Fish jsondata = new Fish() { typeOfFish = typeoffish, weight = weight};
+                string jsonstring = JsonSerializer.Serialize(jsondata);
+                StringContent ToSend = new(jsonstring,Encoding.UTF8,"Application/JSON");
+                HttpResponseMessage response = await client.PostAsync("/fish",ToSend);
+                response.EnsureSuccessStatusCode();
+                string result = await response.Content.ReadAsStringAsync();
+                ServerResponse data = JsonSerializer.Deserialize<ServerResponse>(result);
+                return data;
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public async Task<List<Fish>> GetFishes()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("/fish");
+                response.EnsureSuccessStatusCode();
+                string dataString = await response.Content.ReadAsStringAsync();
+                List<Fish> list = JsonSerializer.Deserialize<List<Fish>>(dataString);
+                return list;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }
